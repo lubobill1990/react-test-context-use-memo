@@ -1,8 +1,5 @@
 #root {
-  max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
 }
 
 .logo {
@@ -32,15 +29,18 @@
   }
 }
 
-.card {
-  padding: 2em;
-}
-
-.card button {
+button {
   display: block;
   margin: 1rem 0;
 }
 
 .flex {
   display: flex;
+}
+
+.boundary {
+  border: 1px solid #888;
+  border-radius: 4px;
+  padding: 1rem;
+  flex: 1;
 }
