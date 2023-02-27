@@ -1,10 +1,10 @@
-import React, { createContext, memo, useMemo, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import "./App.css";
+import React, { createContext, memo, useMemo, useState } from 'react';
+import reactLogo from './assets/react.svg';
+import './App.css';
 
 const Boundary = ({ children }: React.PropsWithChildren) => {
   return (
-    <div className="boundary">
+    <div className='boundary'>
       <RerenderCount />
       {children}
     </div>
@@ -20,7 +20,7 @@ const RerenderCount = () => {
 const AppContext = createContext({
   count: 0,
   setCount: (count: number) => {},
-  text: "",
+  text: '',
   setText: (text: string) => {},
   setInternalCount: (value: number) => {},
 });
@@ -32,7 +32,7 @@ function useAppContext() {
 const AppContextProvider = ({ children }: React.PropsWithChildren) => {
   const [count, setCount] = useState(0);
   const [internalCount, setInternalCount] = useState(0);
-  const [text, setText] = useState("");
+  const [text, setText] = useState('');
   const value = useMemo(
     () => ({
       count,
@@ -41,7 +41,7 @@ const AppContextProvider = ({ children }: React.PropsWithChildren) => {
       setText,
       setInternalCount,
     }),
-    [count, text, internalCount]
+    [count, text]
   );
 
   // const value = {
@@ -51,13 +51,13 @@ const AppContextProvider = ({ children }: React.PropsWithChildren) => {
   //   setText,
   //   setInternalCount,
   // };
-  console.log("AppContextProvider rerender", value);
+  console.log('AppContextProvider rerender', value, { internalCount });
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 
 const Count = memo(() => {
   const { count, setCount } = useAppContext();
-  console.log("count rerender", count);
+  console.log('count rerender', count);
   return (
     <Boundary>
       <p>Count: {count}</p>
@@ -69,7 +69,7 @@ const Count = memo(() => {
 
 const InternalCount = memo(() => {
   const { setInternalCount } = useAppContext();
-  console.log("internal count rerender");
+  console.log('internal count rerender');
   return (
     <Boundary>
       <p>Internal Count</p>
@@ -85,12 +85,12 @@ const InternalCount = memo(() => {
 
 const Paragraph = memo(() => {
   const { setText, text } = useAppContext();
-  console.log("paragraph rerender", text);
+  console.log('paragraph rerender', text);
   return (
     <Boundary>
       <p>Text: {text}</p>
-      <button onClick={() => setText("World")}>Set text to `World`</button>
-      <button onClick={() => setText("Hello")}>Set text to `Hello`</button>
+      <button onClick={() => setText('World')}>Set text to `World`</button>
+      <button onClick={() => setText('Hello')}>Set text to `Hello`</button>
     </Boundary>
   );
 });
@@ -98,10 +98,10 @@ const Paragraph = memo(() => {
 function App() {
   return (
     <AppContextProvider>
-      <div className="App">
+      <div className='App'>
         <Boundary>
           <h1>Test React context useMemo</h1>
-          <div className="flex">
+          <div className='flex'>
             <InternalCount></InternalCount>
             <Count></Count>
             <Paragraph></Paragraph>
